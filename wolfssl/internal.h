@@ -5598,6 +5598,7 @@ struct WOLFSSL {
 #endif
 #if defined(WOLFSSL_SCTP) || defined(WOLFSSL_DTLS_MTU)
     word16          dtlsMtuSz;
+    wolfSSL_dtls_timer_cb dtlsTimerCb;
 #endif /* WOLFSSL_SCTP || WOLFSSL_DTLS_MTU */
 #ifdef WOLFSSL_MULTICAST
     void*           mcastHwCbCtx;       /* Multicast highwater callback ctx */

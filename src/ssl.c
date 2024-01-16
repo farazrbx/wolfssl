@@ -2173,6 +2173,12 @@ int wolfSSL_dtls_set_mtu(WOLFSSL* ssl, word16 newMtu)
     return WOLFSSL_SUCCESS;
 }
 
+int wolfSSL_dtls_set_timer_cb(WOLFSSL* ssl, wolfSSL_dtls_timer_cb cb)
+{
+    ssl->dtlsTimerCb = cb;
+    return WOLFSSL_SUCCESS;
+}
+
 #endif /* WOLFSSL_DTLS && (WOLFSSL_SCTP || WOLFSSL_DTLS_MTU) */
 
 #ifdef WOLFSSL_SRTP
@@ -12076,7 +12082,9 @@ int wolfSSL_DTLSv1_get_timeout(WOLFSSL* ssl, WOLFSSL_TIMEVAL* timeleft)
 int wolfSSL_DTLSv1_handle_timeout(WOLFSSL* ssl)
 {
     WOLFSSL_STUB("SSL_DTLSv1_handle_timeout");
-    (void)ssl;
+    if (ssl->dtlsTimerCb != NULL) {
+        ssl->dtlsTimerCb(ssl, 0);
+    }
     return 0;
 }
 #endif

@@ -1457,6 +1457,9 @@ WOLFSSL_API int  wolfSSL_dtls_set_sctp(WOLFSSL* ssl);
 WOLFSSL_API int  wolfSSL_CTX_dtls_set_mtu(WOLFSSL_CTX* ctx, unsigned short);
 WOLFSSL_API int  wolfSSL_dtls_set_mtu(WOLFSSL* ssl, unsigned short);
 
+typedef unsigned int (*wolfSSL_dtls_timer_cb)(WOLFSSL *s, unsigned int timer_us);
+WOLFSSL_API int wolfSSL_dtls_set_timer_cb(WOLFSSL* ssl, wolfSSL_dtls_timer_cb cb);
+
 #ifdef WOLFSSL_SRTP
 
 /* SRTP Profile ID's from RFC 5764 and RFC 7714 */
